@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import Pokedex from "./Pokedex.jsx";
-import Home from "./Home.jsx";
-import Search from "./Search.jsx";
-import Pokemon from "./Pokemon.jsx";
-import GuessPokemon from "./GuessPokemon.jsx";
-import GuessType from "./GuessType.jsx";
-import HigherOrLower from "./HigherOrLower.jsx";
+import Pokedex from "./Pokedex";
+import Home from "./Home";
+import Search from "./Search";
+import Pokemon from "./Pokemon";
+import GuessPokemon from "./GuessPokemon";
+import GuessType from "./GuessType";
+import HigherOrLower from "./HigherOrLower";
 import "./App.css";
 
 const NavigationBar = () => {
