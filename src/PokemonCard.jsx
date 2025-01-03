@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../pokemon-game-template/PokemonCard.css";
+import "./PokemonCard.css";
 
 const PokemonCard = ({ pokemon }) => {
     const pokeID = pokemon.url.split("/").filter(Boolean).pop();

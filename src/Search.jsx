@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PokemonCard from "./PokemonCard.jsx";
-import "../../pokemon-game-template/Search.css";
+import "./Search.css";
 
 const Search = () => {
     const [pokemons, setPokemons] = useState([]);
