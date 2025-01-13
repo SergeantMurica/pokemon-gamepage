@@ -1,40 +1,48 @@
-import React from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import Pokedex from "./Pokedex";
-import Home from "./Home";
-import Search from "./Search";
-import Pokemon from "./Pokemon";
-import GuessPokemon from "./GuessPokemon";
-import GuessType from "./GuessType";
-import HigherOrLower from "./HigherOrLower";
+import React, {useEffect, useState} from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Pokedex from "./pages/Pokedex/Pokedex.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Search from "./pages/Search/Search.jsx";
+import Pokemon from "./components/Pokemon/Pokemon.jsx";
+import GuessPokemon from "./pages/GuessPokemon/GuessPokemon.jsx";
+import GuessType from "./pages/GuessType/GuessType.jsx";
+import HigherOrLower from "./pages/HigherOrLower/HigherOrLower.jsx";
+import NavigationDrop from "./components/Header/NavigationDrop.jsx";
+import NavigationBar from "./components/Header/NavigationBar.jsx";
 import "./App.css";
 
-const NavigationBar = () => {
-    return (
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/pokedex">Pokédex</Link>
-            <Link to="/search">Search</Link>
-            <Link to="/guess-pokemon">Who's That Pokémon?</Link>
-            <Link to="/guess-type">Guess The Pokémon's Type</Link>
-            <Link to="/higher-or-lower">Higher or Lower</Link>
-        </nav>
-    );
-};
 
 const App = () => {
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <BrowserRouter>
-            <NavigationBar />
+            <div>
+                {isMobile ? <NavigationDrop/> : <NavigationBar/>}
+            </div>
             <div className="content">
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/pokedex" element={<Pokedex />} />
-                    <Route path="/search" element={<Search />} />
-                    <Route path="/pokemon" element={<Pokemon />} />
-                    <Route path="/guess-pokemon" element={<GuessPokemon />} />
-                    <Route path="/guess-type" element={<GuessType />} />
-                    <Route path="/higher-or-lower" element={<HigherOrLower />} />
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/pokedex" element={<Pokedex/>}/>
+                    <Route path="/search" element={<Search/>}/>
+                    <Route path="/pokemon" element={<Pokemon/>}/>
+                    <Route path="/guess-pokemon" element={<GuessPokemon/>}/>
+                    <Route path="/guess-type" element={<GuessType/>}/>
+                    <Route path="/higher-or-lower" element={<HigherOrLower/>}/>
                 </Routes>
             </div>
         </BrowserRouter>
