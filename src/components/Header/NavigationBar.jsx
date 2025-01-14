@@ -21,6 +21,7 @@ const NavigationBar = () => {
                         {websiteData.pages[key].name}
                     </NavLink>
                 ))}
+
             </div>
         </nav>
     );

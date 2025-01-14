@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PokemonCard from "../../components/Pokemon/PokemonCard.jsx";
 
-const Pokedex = () => {
+const Pokedex = (search) => {
     const [pokemons, setPokemons] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -34,7 +34,7 @@ const Pokedex = () => {
     return (
         <div>
             <h1>Pokédex</h1>
-            <div className="pokePage">
+            <div className="poke-page">
                 <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
                 <span>Page {currentPage} of {totalPages}</span>
                 <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
@@ -44,7 +44,7 @@ const Pokedex = () => {
                     <PokemonCard key={index} pokemon={pokemon} />
                 ))}
             </div>
-            <div className="pokePage">
+            <div className="poke-page">
                 <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
                 <span>Page {currentPage} of {totalPages}</span>
                 <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PokemonCard from "../../components/Pokemon/PokemonCard.jsx";
 import "./Search.css";
 
+
 const Search = () => {
     const [pokemons, setPokemons] = useState([]);
     const [filteredPokemons, setFilteredPokemons] = useState([]);

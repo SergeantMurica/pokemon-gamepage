@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const Pokemon = () => {
     const [pokemon, setPokemon] = useState(null);
@@ -43,6 +43,9 @@ const Pokemon = () => {
 
     return (
         <div>
+            <div>
+                <Link className="back-button" to="/pokedex">&times;</Link>
+            </div>
             <h1>{pokemon.name}</h1>
             {isImageAvailable ? <img src={spriteUrl} alt={pokemon.name} /> : <p>No image</p>}
             {pokemon.height && <p>Height: {pokemon.height}</p>}
