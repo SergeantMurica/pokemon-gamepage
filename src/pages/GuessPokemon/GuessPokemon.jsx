@@ -1,74 +1,116 @@
 import React, { useState, useEffect } from "react";
 
 const GuessPokemon = () => {
-    const [pokemon, setPokemon] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [answer, setAnswer] = useState("");
-    const [feedback, setFeedback] = useState("");
-    const [points, setPoints] = useState(0);
+  const [pokemon, setPokemon] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [answer, setAnswer] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [points, setPoints] = useState(0);
+  const [error, setError] = useState("");
+  const [isRevealed, setIsRevealed] = useState(false);
 
-    const fetchRandomPokemon = async () => {
+  const fetchRandomPokemon = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      let pokemonData = null;
+
+      for (let attempt = 0; attempt < 6; attempt++) {
         const randomId = Math.floor(Math.random() * 151) + 1;
-        try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
-            const data = await response.json();
-            setPokemon(data);
-            setLoading(false);
-            setFeedback("");
-            setAnswer("");
-        } catch (error) {
-            console.error("Error fetching Pokémon:", error);
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${randomId}`,
+        );
+
+        if (!response.ok) {
+          continue;
         }
-    };
 
-    useEffect(() => {
-        fetchRandomPokemon();
-    }, []);
+        const data = await response.json();
 
-    const handleGuess = () => {
-        if (answer.toLowerCase() === pokemon.name.toLowerCase()) {
-            setFeedback("Correct! It's " + pokemon.name + "!");
-            setPoints(points + 1);
-        } else {
-            setFeedback("Nope! Try again!");
+        if (data?.sprites?.front_default) {
+          pokemonData = data;
+          break;
         }
-    };
+      }
 
-    const spriteUrl = pokemon ? pokemon.sprites.front_default : "";
-    const isImageAvailable = spriteUrl !== null;
+      if (!pokemonData) {
+        throw new Error("Unable to load a Pokémon right now.");
+      }
 
-    if (isImageAvailable === false){
-        fetchRandomPokemon();
-    };
+      setPokemon(pokemonData);
+      setFeedback("");
+      setAnswer("");
+      setIsRevealed(false);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchRandomPokemon();
+  }, []);
 
-    return (
-        <div>
-            <h1>Who's That Pokémon?</h1>
-            <p>Points: {points}</p>
-            {loading && <p>Loading...</p>}
-            {!loading && pokemon && (
-                <>
-                    <img
-                        src={spriteUrl}
-                        alt={pokemon.name}
-                        style={{ filter: "brightness(0)" }}
-                    />
-                    <div className="content-inputs">
-                        <input
-                            type="text"
-                            value={answer}
-                            onChange={(e) => setAnswer(e.target.value)}
-                            placeholder="Enter Pokémon name..."
-                        />
-                        <button onClick={handleGuess}>Guess</button>
-                    </div>
-                    {feedback && <p>{feedback}</p>}
-                    {feedback.startsWith("Correct") && <button onClick={fetchRandomPokemon}>Next</button>}
-                </>
-            )}
-        </div>
-    );
+  const handleGuess = () => {
+    if (!pokemon) {
+      return;
+    }
+
+    const normalizedAnswer = answer.trim().toLowerCase();
+
+    if (!normalizedAnswer) {
+      setFeedback("Type a Pokémon name first!");
+      return;
+    }
+
+    if (normalizedAnswer === pokemon.name.toLowerCase()) {
+      setFeedback("Correct! It's " + pokemon.name + "!");
+      setPoints((prevPoints) => prevPoints + 1);
+      setIsRevealed(true);
+    } else {
+      setFeedback("Nope! Try again!");
+    }
+  };
+
+  return (
+    <div className="game-shell">
+      <h1>Who's That Pokémon?</h1>
+      <p className="game-score">Points: {points}</p>
+      {loading && <p>Loading...</p>}
+      {error && !loading && <p>{error}</p>}
+      {!loading && !error && pokemon && (
+        <>
+          <img
+            src={pokemon.sprites.front_default}
+            alt={pokemon.name}
+            className={`game-image ${isRevealed ? "" : "silhouette"}`}
+          />
+          <div className="content-inputs">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  handleGuess();
+                }
+              }}
+              placeholder="Enter Pokémon name..."
+            />
+            <div className="buttons-container">
+              <button onClick={handleGuess}>Guess</button>
+              {feedback.startsWith("Correct") && (
+                <button onClick={fetchRandomPokemon}>Next</button>
+              )}
+            </div>
+          </div>
+          {feedback && <p>{feedback}</p>}
+        </>
+      )}
+    </div>
+  );
 };
 
 export default GuessPokemon;

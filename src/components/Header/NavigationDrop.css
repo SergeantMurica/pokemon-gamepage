@@ -1,63 +1,76 @@
 .dropdown_navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: black;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    color: black; /* Black text for contrast */
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(1100px, calc(100% - 1.5rem));
+  margin: 1rem auto 0;
+  padding: 0.7rem 0.9rem;
+  background-color: black;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  color: #f7e39c;
+  border-radius: 10px;
+  -webkit-box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .dropdown_home {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .dropdown_home:hover {
-    color: black;
+  color: black;
 }
 
 .dropdown_home.active {
-    color: #ffbd59;
+  color: #ffbd59;
 }
 
 .menu_button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 .menu_button:hover {
-    color: #ffbd59;
+  color: #ffbd59;
 }
 
 .dropdown_menu {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: black;
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  left: 0;
+  width: 100%;
+  background-color: black;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border-radius: 10px;
 }
 
 .dropdown_item {
-    color: black;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    border: ghostwhite solid 1px;
+  color: #f7e39c;
+  padding: 0.7rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: #ffffff solid 1px;
+  border-radius: 6px;
 }
 
-.dropdown_item:hover, .dropdown_item.active {
-    border: ghostwhite solid 1px;
-    color: #ffbd59;
+.dropdown_item:hover,
+.dropdown_item.active {
+  border: #ffffff solid 1px;
+  color: #272727;
+  background-color: #ffffff;
 }
