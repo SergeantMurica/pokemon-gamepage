@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const GuessType = () => {
   const [pokemon, setPokemon] = useState(null);
@@ -68,9 +68,7 @@ const GuessType = () => {
         (type) => type.type.name.toLowerCase() === normalizedAnswer,
       )
     ) {
-      setFeedback(
-        `Correct! ${pokemon.name}'s type includes ${normalizedAnswer}!`,
-      );
+      setFeedback(`Correct! ${pokemon.name} includes ${normalizedAnswer}!`);
       setPoints((prevPoints) => prevPoints + 1);
     } else {
       setFeedback("Nope! Try again!");

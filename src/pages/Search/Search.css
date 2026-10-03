@@ -1,12 +1,14 @@
 input {
-    font-family: "Press Start 2P", sans-serif;
-    padding: 10px;
-    width: 80%;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    margin: 20px 0;
+  font-family: "Press Start 2P", sans-serif;
+  padding: 12px 14px;
+  width: min(100%, 520px);
+  border: 3px solid rgba(17, 21, 25, 0.9);
+  border-radius: 12px;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.85);
+  color: #111111;
 }
 
 input::placeholder {
-    color: #d32d27;
+  color: #4f5f6d;
 }

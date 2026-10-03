@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import websiteData from "../../utils/websiteData.jsx";
 import "./Home.css";
@@ -29,19 +28,38 @@ const homeCards = [
 const Home = () => {
   return (
     <section className="home">
-      <div className="home-hero">
-        <h1>Welcome To My Pokédex Arcade</h1>
-        <p>
-          Explore first-generation Pokémon, challenge yourself with mini games,
-          and improve your Pokémon knowledge in one place.
-        </p>
-        <div className="home-actions">
-          <Link to="/pokedex" className="home-action-link">
-            Open Pokédex
-          </Link>
-          <Link to="/guess-pokemon" className="home-action-link">
-            Play A Game
-          </Link>
+      <div className="pokedex-shell">
+        <div className="pokedex-top">
+          <div className="status-lights">
+            <span className="light light-blue" />
+            <span className="light light-yellow" />
+            <span className="light light-green" />
+          </div>
+        </div>
+
+        <div className="pokedex-screen-wrap">
+          <div className="pokedex-screen">
+            <div className="screen-header">Pokédex</div>
+            <div className="screen-badge">Gen 1</div>
+            <h1>Welcome to the Pokédex</h1>
+            <p>
+              Explore the original 151, sharpen your memory, and challenge your
+              Pokémon instincts across every mode.
+            </p>
+            <div className="home-actions">
+              <Link to="/pokedex" className="home-action-link">
+                Open Pokédex
+              </Link>
+              <Link to="/guess-pokemon" className="home-action-link">
+                Play A Game
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="pokedex-controls">
+          <div className="device-indicator">READY</div>
+          <div className="device-indicator small">GEN I</div>
         </div>
       </div>
 
