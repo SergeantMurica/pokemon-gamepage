@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const GuessPokemon = () => {
   const [pokemon, setPokemon] = useState(null);
@@ -66,7 +66,7 @@ const GuessPokemon = () => {
     }
 
     if (normalizedAnswer === pokemon.name.toLowerCase()) {
-      setFeedback("Correct! It's " + pokemon.name + "!");
+      setFeedback("Correct! It is " + pokemon.name + "!");
       setPoints((prevPoints) => prevPoints + 1);
       setIsRevealed(true);
     } else {
@@ -82,11 +82,13 @@ const GuessPokemon = () => {
       {error && !loading && <p>{error}</p>}
       {!loading && !error && pokemon && (
         <>
-          <img
-            src={pokemon.sprites.front_default}
-            alt={pokemon.name}
-            className={`game-image ${isRevealed ? "" : "silhouette"}`}
-          />
+          <div className="game-display">
+            <img
+              src={pokemon.sprites.front_default}
+              alt={pokemon.name}
+              className={`game-image ${isRevealed ? "" : "silhouette"}`}
+            />
+          </div>
           <div className="content-inputs">
             <input
               type="text"

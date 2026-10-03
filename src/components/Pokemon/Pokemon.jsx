@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Pokemon = () => {
@@ -55,6 +55,7 @@ const Pokemon = () => {
       <Link className="back-button" to="/pokedex">
         Back
       </Link>
+      <div className="pokemon-id">#{String(pokemon.id).padStart(3, "0")}</div>
       <h1>{pokemon.name}</h1>
       {isImageAvailable ? (
         <img src={spriteUrl} alt={pokemon.name} />
