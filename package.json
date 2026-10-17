@@ -5,8 +5,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node api.js && react-scripts start",
-    "dev": "node api.js && vite",
+    "start": "react-scripts start",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
